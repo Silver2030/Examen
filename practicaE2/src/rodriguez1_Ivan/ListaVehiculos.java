@@ -45,11 +45,13 @@ public class ListaVehiculos {
 		boolean alquilado = false;
 		
 		Vehiculo vehiculo = buscarVehiculo(matricula);
-		
-		if(vehiculo.getMatricula().equalsIgnoreCase(matricula)) {
+		if(vehiculo == null ) System.out.println("No existe el vehiculo");
+		else {
+			if(vehiculo.getMatricula().equalsIgnoreCase(matricula)) {
 			alquilado = vehiculo.alquilar(dni);
 			if(alquilado == false) System.out.println("No se puede alquilar, vehiculo actualmente alquilado");
 			else System.out.println("Vehiculo alquilado.");
+			}
 		}
 		System.out.println();
 		return alquilado;
@@ -60,12 +62,14 @@ public class ListaVehiculos {
 		boolean existe = false;
 		
 		Vehiculo vehiculo = buscarVehiculo(matricula);
-		
-		if(vehiculo.getMatricula().equalsIgnoreCase(matricula)) {
+		if(vehiculo == null ) System.out.println("No existe el vehiculo");
+		else {
+			if(vehiculo.getMatricula().equalsIgnoreCase(matricula)) {
 			existe = true;
 			devuelto = vehiculo.devolver();
 			if(devuelto == false) System.out.println("No se puede devolver, vehiculo actualmente no alquilado");
 			else System.out.println("Vehiculo devuelto.");
+			}
 		}
 		if(existe == false) System.out.println("No existe el vehiculo.");
 		System.out.println();
