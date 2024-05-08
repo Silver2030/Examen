@@ -1,8 +1,9 @@
 package rodriguez1_Ivan;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class CocheElectrico extends Coche {
+public class CocheElectrico extends Coche implements Serializable {
 	private int autonomia;
 
 	public CocheElectrico() {

@@ -30,6 +30,8 @@ public class AppAlquiler {
 				System.out.println("10) Alquilar vehículo");
 				System.out.println("11) Devolver vehículo");
 				System.out.println("12) Modificar descuento coche");
+				System.out.println("13) Guardar Fichero");
+				System.out.println("14) Cargar datos Fichero");
 				System.out.print("Opcion: ");
 				resp = in.nextInt();
 				in.nextLine();
@@ -121,7 +123,7 @@ public class AppAlquiler {
 						break;
 						
 					case 12:
-						Coche coche = new Coche();
+						CocheCombustion coche = new CocheCombustion();
 						System.out.print("Dias: ");
 						dias = in.nextInt();
 						System.out.print("Descuento: ");
@@ -130,8 +132,26 @@ public class AppAlquiler {
 						coche.modificarDescuento(dias, descuento);
 						break;
 						
+					case 13:
+						obj.guardarFichero();
+						System.out.println("Fichero guardado");
+						System.out.println();
+						break;
+						
+					case 14:
+						System.out.println("1) Coches Electricos");
+						System.out.println("2) Coches de Combustión");
+						System.out.println("3) Motos");
+						System.out.println("4) Todos");
+						System.out.print("Seleccionar: ");
+						tipo = in.nextInt();
+						System.out.println();
+						obj.cargarDatos(tipo);
+						break;
+						
 					default:
 						System.out.println("Opcion introducidad no valida");
+						System.out.println();
 						break;
 				}
 			}while(resp != 0);

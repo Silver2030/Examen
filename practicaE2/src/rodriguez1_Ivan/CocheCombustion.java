@@ -1,8 +1,9 @@
 package rodriguez1_Ivan;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class CocheCombustion extends Coche {
+public class CocheCombustion extends Coche implements Serializable {
 	private int capacidad;
 
 	public CocheCombustion() {

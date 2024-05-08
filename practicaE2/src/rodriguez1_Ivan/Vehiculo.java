@@ -1,6 +1,8 @@
 package rodriguez1_Ivan;
 
-public abstract class Vehiculo {
+import java.io.Serializable;
+
+public abstract class Vehiculo implements Serializable {
 	private String matricula;
 	private boolean alquilado;
 	private String dni;

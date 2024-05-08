@@ -1,5 +1,11 @@
 package rodriguez1_Ivan;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -97,7 +103,7 @@ public class ListaVehiculos {
 			break;
 			
 		default:
-			
+			System.out.println("Opcion introducida no registrada");
 			break;
 		}
 		System.out.println();
@@ -134,6 +140,75 @@ public class ListaVehiculos {
 	public void presupuestoHoras(String matricula, byte horas) { // Metodo para mostrar el presupuesto por horas de una matricula
 		for(Vehiculo vehiculo : this.listaVehiculos) {
 			if(vehiculo.getMatricula().equalsIgnoreCase(matricula)) System.out.println("Presupuesto por Horas: " + vehiculo.presupuesto(horas));
+		}
+	}
+	
+	public void guardarFichero() throws FileNotFoundException, IOException, ClassNotFoundException {
+		FileOutputStream fichero = null;
+		try {
+			fichero = new FileOutputStream("vehiculos.dat");
+			ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+			tuberia.writeObject(this.listaVehiculos);
+		}catch(FileNotFoundException ex) {
+			ex.printStackTrace();
+		}catch(IOException ex) {
+			ex.printStackTrace();
+		}finally {
+			try {
+				fichero.close();
+			}catch(IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	public void cargarDatos(int opcion) throws FileNotFoundException, IOException, ClassNotFoundException {
+		FileInputStream fis;
+		try {
+			  fis = new FileInputStream("vehiculos.dat");
+			  ObjectInputStream ois = new ObjectInputStream(fis);
+			  ArrayList<Vehiculo> list = (ArrayList<Vehiculo>) ois.readObject();
+			  ois.close();
+			  switch(opcion) {
+			  case 1:
+				  for(Vehiculo vehiculo : list) {
+				  	  if(vehiculo instanceof CocheElectrico) this.listaVehiculos.add(vehiculo);
+				  }
+				  System.out.println("Datos cargados.");
+				  break;
+				  
+			  case 2:
+				  for(Vehiculo vehiculo : list) {
+				  	  if(vehiculo instanceof CocheCombustion) this.listaVehiculos.add(vehiculo);
+				  }
+				  System.out.println("Datos cargados.");
+				  break;
+				  
+			  case 3:
+				  for(Vehiculo vehiculo : list) {
+				  	  if(vehiculo instanceof Moto) this.listaVehiculos.add(vehiculo);
+				  }
+				  System.out.println("Datos cargados.");
+				  break;
+				  
+			  case 4:
+				  for(Vehiculo vehiculo : list) {
+				  	  this.listaVehiculos.add(vehiculo);
+				  }
+				  System.out.println("Datos cargados.");
+				  break;
+				  
+			  default:
+				  System.out.println("Opcion introducida no registrada");
+				  break;
+			  }
+			  System.out.println();
+		}catch(FileNotFoundException ex) {
+			ex.printStackTrace();
+		}catch(IOException ex) {
+			ex.printStackTrace();
+		}catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
 		}
 	}
 }

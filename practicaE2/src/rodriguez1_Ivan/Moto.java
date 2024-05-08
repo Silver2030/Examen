@@ -1,8 +1,9 @@
 package rodriguez1_Ivan;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Moto extends Vehiculo {
+public class Moto extends Vehiculo implements Serializable {
 	private int cilindrada;
 
 	public Moto() {

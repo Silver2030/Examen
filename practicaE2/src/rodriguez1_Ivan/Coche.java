@@ -1,10 +1,12 @@
 package rodriguez1_Ivan;
 
-public class Coche extends Vehiculo {
+import java.io.Serializable;
+
+public abstract class Coche extends Vehiculo implements Serializable {
 	private int numPuertas;
 	private int potencia;
 	private int[] dias = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-	private double[] descuentos = {0.97, 0.94, 0.93, 0.91, 0.90, 0.88, 0.87, 0.86, 0.85,};
+	private double[] descuentos = {0.97, 0.94, 0.93, 0.91, 0.90, 0.88, 0.87, 0.86, 0.85};
 
 	public Coche() {
 		super();
@@ -27,12 +29,11 @@ public class Coche extends Vehiculo {
 	}
 	
 	public void modificarDescuento(int dias, byte descuento) {
-		double descuentoTotal = descuento / 100;
-		
-		if((descuentoTotal >= 0.0)&&(descuentoTotal <= 0.5)) {
+		double descuentoTotal = descuento;
+		if((descuentoTotal >= 0)&&(descuentoTotal <= 50)) {
 			for(int i = 0; i < this.dias.length ; i++) {
 				if(dias == this.dias[i]) {
-					this.descuentos[i] = descuentoTotal;
+					this.descuentos[i] = descuentoTotal / 100;
 					System.out.println("Descuento modificado.");
 				}
 			}
@@ -40,25 +41,13 @@ public class Coche extends Vehiculo {
 		System.out.println();
 	}
 	
-	@Override
-	public double precioPorHora() {
-		return 0;
-	}
-
-	@Override
-	public double precioPorDia() {
-		return 0;
-	}
-
-	@Override
-	public double presupuesto(int dias) {
-		return 0;
-	}
-
-	@Override
-	public double presupuesto(byte horas) {
-		return 0;
-	}
+	public abstract double precioPorHora();
+	
+	public abstract double precioPorDia();
+	
+	public abstract double presupuesto(int dias);
+	
+	public abstract double presupuesto(byte horas);
 
 	/**
 	 * @return the numPuertas
